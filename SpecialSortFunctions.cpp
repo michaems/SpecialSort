@@ -6,10 +6,7 @@
 
 char* SpecialSort(const char* toBeSorted){
 
-	if ((toBeSorted != NULL) && (toBeSorted[0] == '\0'))
-		return NULL;
-
-	if (toBeSorted == NULL)
+	if (((toBeSorted != NULL) && (toBeSorted[0] == '\0')) || toBeSorted == NULL)
 		return NULL;
 
 	int* charIndexes;
@@ -23,7 +20,7 @@ char* SpecialSort(const char* toBeSorted){
 	int patlen = strlen(pattern);
 
 	charIndexes = (int*)malloc((textlen)*sizeof(int));
-	memset(charIndexes, 0, (textlen+1)*sizeof(int));
+	memset(charIndexes, 0, (textlen)*sizeof(int));
 
 	//find the sequence
 	for (int i = 0; i< textlen; i++) {
@@ -46,16 +43,17 @@ char* SpecialSort(const char* toBeSorted){
 		sortedStr[i] = tolower(pattern[charIndexes[i]]);
 	}
 
+	//free reserved memory
+	free(charIndexes);
+	charIndexes = NULL;
+
 	return sortedStr;
 }
 
 int CompareNums(const void *first, const void *second) {
-
 	int result;
-
 	if (*(int*)first == *(int*)second) result = 0;
 	if (*(int*)first > *(int*)second) result = 1;
 	if (*(int*)first < *(int*)second) result = -1;
-
 	return result;
 }

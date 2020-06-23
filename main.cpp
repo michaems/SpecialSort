@@ -5,6 +5,7 @@
  * Author: michael
  */
 #include <stdio.h>
+#include <stdlib.h>
 #include "SpecialSortFunctions.h"
 
 int main(int argc, char **argv) {
@@ -13,13 +14,11 @@ int main(int argc, char **argv) {
 	const char *rawText = "eke-elektroniikka";
 
 	finalText = SpecialSort(rawText);
-	printf("The result is: %s\n", finalText);
+	if (finalText != NULL) {
+		printf("The result is: %s\n", finalText);
+		free(finalText);
+		finalText = NULL;
+	}
 
 	return 0;
 }
-
-
-
-
-
-
